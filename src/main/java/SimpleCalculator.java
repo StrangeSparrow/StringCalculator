@@ -13,7 +13,7 @@ public class SimpleCalculator {
             return biCalc(resEx);
         }
 
-        Pattern p = Pattern.compile("\\(-?\\d+([\\+,\\-,\\*,/]\\d+)*\\)");
+        Pattern p = Pattern.compile("\\(-?\\d+([+,\\-*/]\\d+)*\\)");
         Matcher m;
         Integer priorityRes;
         String priorityEx;
@@ -22,9 +22,9 @@ public class SimpleCalculator {
             m = p.matcher(resEx);
 
             if (m.find()) {
-                priorityEx = m.group().replaceAll("[\\(,\\)]", "");
+                priorityEx = m.group().replaceAll("[(,)]", "");
                 priorityRes = multiCalc(priorityEx);
-                resEx = resEx.replaceFirst("\\(-?\\d+([\\+,\\-,\\*,/]\\d+)*\\)", String.valueOf(priorityRes));
+                resEx = resEx.replaceFirst("\\(-?\\d+([+,\\-*/]\\d+)*\\)", String.valueOf(priorityRes));
             } else {
                 break;
             }
@@ -43,7 +43,7 @@ public class SimpleCalculator {
                 break;
 
             biRes = biCalc(biEx);
-            resEx = resEx.replaceFirst("\\d+[\\*,/]\\d+", String.valueOf(biRes));
+            resEx = resEx.replaceFirst("\\d+[*,/]\\d+", String.valueOf(biRes));
         }
 
         while (!isBiEx(resEx)) {
@@ -52,14 +52,14 @@ public class SimpleCalculator {
                 break;
 
             biRes = biCalc(biEx);
-            resEx = resEx.replaceFirst("(^\\d+[\\+,\\-,\\*,/]\\d+)", String.valueOf(biRes));
+            resEx = resEx.replaceFirst("(^\\d+[+,\\-*/]\\d+)", String.valueOf(biRes));
         }
         return biCalc(resEx);
     }
 
     public static String getPriorityOperation(String ex) {
         String resEx = ex.replace(" ", "");
-        Pattern p = Pattern.compile("[\\d]+[\\*,/][\\d]+");
+        Pattern p = Pattern.compile("[\\d]+[*,/][\\d]+");
         Matcher m = p.matcher(resEx);
 
         if (m.find()) {
@@ -71,7 +71,7 @@ public class SimpleCalculator {
     public static String getBiEx(String ex) {
         String resEx = ex.replace(" ", "");
 
-        Pattern p = Pattern.compile("^[\\d]+[\\+,\\-,\\*,/][\\d]+");
+        Pattern p = Pattern.compile("^[\\d]+[+,\\-*/][\\d]+");
         Matcher m = p.matcher(resEx);
 
         if (m.find())
@@ -90,7 +90,7 @@ public class SimpleCalculator {
     public static Operands getOperands(String ex) {
         String resEx = ex.replace(" ", "");
 
-        Pattern p = Pattern.compile("(^\\-)?\\d+");
+        Pattern p = Pattern.compile("(^-)?\\d+");
         Matcher m = p.matcher(resEx);
 
         List<Integer> results = m.results()
@@ -108,7 +108,7 @@ public class SimpleCalculator {
     }
 
     public static Operator getOperator(String ex) throws OperationNotSupportedException {
-        Pattern p = Pattern.compile("[\\+,\\-,\\*,/]");
+        Pattern p = Pattern.compile("[+,\\-*/]");
         Matcher m = p.matcher(ex);
 
         String op;
@@ -142,7 +142,7 @@ public class SimpleCalculator {
 
     private static boolean isBiEx(String ex) {
         String resEx = ex.replace(" ", "");
-        Pattern p = Pattern.compile("^[\\d]+[\\+,\\-,\\*,/][\\d]+$");
+        Pattern p = Pattern.compile("^[\\d]+[+,\\-*/][\\d]+$");
         Matcher m = p.matcher(resEx);
 
         return m.find();
