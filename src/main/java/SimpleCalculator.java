@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class SimpleCalculator {
+    public static final String PRIORITY_EX_PATTERN = "\\(-?\\d+([+,\\-*/]\\d+)*\\)";
+
     public static Integer calculate(String ex) throws OperationNotSupportedException {
         String resEx = ex.replace(" ", "");
 
@@ -13,7 +15,7 @@ public class SimpleCalculator {
             return biCalc(resEx);
         }
 
-        Pattern p = Pattern.compile("\\(-?\\d+([+,\\-*/]\\d+)*\\)");
+        Pattern p = Pattern.compile(PRIORITY_EX_PATTERN);
         Matcher m;
         Integer priorityRes;
         String priorityEx;
@@ -24,7 +26,7 @@ public class SimpleCalculator {
             if (m.find()) {
                 priorityEx = m.group().replaceAll("[(,)]", "");
                 priorityRes = multiCalc(priorityEx);
-                resEx = resEx.replaceFirst("\\(-?\\d+([+,\\-*/]\\d+)*\\)", String.valueOf(priorityRes));
+                resEx = resEx.replaceFirst(PRIORITY_EX_PATTERN, String.valueOf(priorityRes));
             } else {
                 break;
             }
