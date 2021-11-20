@@ -92,7 +92,7 @@ class CalculatorTest {
 
     @Test
     void calculateHard2() throws OperationNotSupportedException {
-        String ex = "2 + ((2 * 2) / 4) + 6 - 1 + 2 * 3";
+        String ex = "2.0 + ((2,0 * 2.0) / 4.0) + 6,0 - 1 + 2 * 3";
         Double res = SimpleCalculator.calculate(ex);
 
         assertEquals(14, res);
