@@ -1,20 +1,20 @@
 public class Operands {
-    private Integer left;
-    private Integer right;
+    private Double left;
+    private Double right;
 
-    public Integer getLeft() {
+    public Double getLeft() {
         return left;
     }
 
-    public void setLeft(Integer left) {
+    public void setLeft(Double left) {
         this.left = left;
     }
 
-    public Integer getRight() {
+    public Double getRight() {
         return right;
     }
 
-    public void setRight(Integer right) {
+    public void setRight(Double right) {
         this.right = right;
     }
 }
