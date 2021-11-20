@@ -9,7 +9,7 @@ public class SimpleCalculator {
     private static final String PRIORITY_EX_PATTERN = "\\(-?\\d+(\\.\\d)?\\d*([+,\\-*/]\\d+(\\.\\d)?\\d*)*\\)";
 
     public static Double calculate(String ex) throws OperationNotSupportedException {
-        String resEx = ex.replace(" ", "");
+        String resEx = ex.replace(" ", "").replace(",", ".");
 
         if (isBiEx(resEx)) {
             return biCalc(resEx);
