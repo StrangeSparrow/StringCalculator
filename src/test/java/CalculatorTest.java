@@ -1,3 +1,4 @@
+import org.calculator.impl.SimpleCalculator;
 import org.junit.jupiter.api.Test;
 
 import javax.naming.OperationNotSupportedException;
@@ -102,8 +103,8 @@ class CalculatorTest {
     void priorityOperation() {
         String none = "2 + 3 - 2 - 1";
         String priority = "2 + 4 - 2 * 6 - 3";
-        String error = SimpleCalculator.getPriorityOperation(none);
-        String ok = SimpleCalculator.getPriorityOperation(priority).replace(" ", "");
+        String error = org.calculator.impl.SimpleCalculator.getPriorityOperation(none);
+        String ok = org.calculator.impl.SimpleCalculator.getPriorityOperation(priority).replace(" ", "");
 
         assertNull(error);
         assertEquals("2*6", ok);
@@ -111,33 +112,33 @@ class CalculatorTest {
 
     @Test
     void getOperands() {
-        Operands operands = SimpleCalculator.getOperands(PLUS);
+        org.calculator.Operands operands = org.calculator.impl.SimpleCalculator.getOperands(PLUS);
         assertEquals(2, operands.getLeft());
         assertEquals(3, operands.getRight());
     }
 
     @Test
     void getOperator() throws OperationNotSupportedException {
-        Operator plus = SimpleCalculator.getOperator(PLUS);
-        Operator minus = SimpleCalculator.getOperator(MINUS);
-        Operator multi = SimpleCalculator.getOperator(MULTI);
-        Operator deli = SimpleCalculator.getOperator(DELI);
+        org.calculator.Operator plus = org.calculator.impl.SimpleCalculator.getOperator(PLUS);
+        org.calculator.Operator minus = org.calculator.impl.SimpleCalculator.getOperator(MINUS);
+        org.calculator.Operator multi = org.calculator.impl.SimpleCalculator.getOperator(MULTI);
+        org.calculator.Operator deli = org.calculator.impl.SimpleCalculator.getOperator(DELI);
 
-        assertEquals(Operator.PLUS, plus);
-        assertEquals(Operator.MINUS, minus);
-        assertEquals(Operator.MULTI, multi);
-        assertEquals(Operator.DELI, deli);
+        assertEquals(org.calculator.Operator.PLUS, plus);
+        assertEquals(org.calculator.Operator.MINUS, minus);
+        assertEquals(org.calculator.Operator.MULTI, multi);
+        assertEquals(org.calculator.Operator.DELI, deli);
     }
 
     @Test
     void operatorException() {
-        assertThrows(OperationNotSupportedException.class, () -> SimpleCalculator.getOperator("2 % 3"));
+        assertThrows(OperationNotSupportedException.class, () -> org.calculator.impl.SimpleCalculator.getOperator("2 % 3"));
     }
 
     @Test
     void getBiEx() {
         String operation = PLUS + " - " + MINUS;
-        String ex = SimpleCalculator.getBiEx(operation).replace(" ", "");
+        String ex = org.calculator.impl.SimpleCalculator.getBiEx(operation).replace(" ", "");
 
         assertEquals(PLUS.replace(" ", ""), ex);
     }
@@ -145,7 +146,7 @@ class CalculatorTest {
     @Test
     void getBiExFromVoid() {
         String operation = "";
-        String ex = SimpleCalculator.getBiEx(operation);
+        String ex = org.calculator.impl.SimpleCalculator.getBiEx(operation);
 
         assertNull(ex);
     } */

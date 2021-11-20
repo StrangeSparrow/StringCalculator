@@ -1,3 +1,5 @@
+package org.calculator;
+
 public class CalculatorConst {
     public static final String PLUS = "+";
     public static final String MINUS = "-";
