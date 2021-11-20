@@ -6,11 +6,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class SimpleCalculator {
-    private static final String PLUS = "+";
-    private static final String MINUS = "-";
-    private static final String MULTI = "*";
-    private static final String DELI = "/";
-
     public static Integer calculate(String ex) throws OperationNotSupportedException {
         String resEx = ex.replace(" ", "");
 
@@ -123,13 +118,13 @@ public class SimpleCalculator {
             throw new OperationNotSupportedException(ex);
 
         switch (op) {
-            case PLUS:
+            case CalculatorConst.PLUS:
                 return Operator.PLUS;
-            case MINUS:
+            case CalculatorConst.MINUS:
                 return Operator.MINUS;
-            case MULTI:
+            case CalculatorConst.MULTI:
                 return Operator.MULTI;
-            case DELI:
+            case CalculatorConst.DELI:
                 return Operator.DELI;
         }
         throw new OperationNotSupportedException(ex);
@@ -151,30 +146,5 @@ public class SimpleCalculator {
         Matcher m = p.matcher(resEx);
 
         return m.find();
-    }
-
-    public enum Operator {
-        PLUS, MINUS, MULTI, DELI
-    }
-
-    public static class Operands {
-        private Integer left;
-        private Integer right;
-
-        public Integer getLeft() {
-            return left;
-        }
-
-        public void setLeft(Integer left) {
-            this.left = left;
-        }
-
-        public Integer getRight() {
-            return right;
-        }
-
-        public void setRight(Integer right) {
-            this.right = right;
-        }
     }
 }

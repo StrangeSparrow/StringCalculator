@@ -36,22 +36,22 @@ class CalculatorTest {
 
     @Test
     void getOperands() {
-        SimpleCalculator.Operands operands = SimpleCalculator.getOperands(PLUS);
+        Operands operands = SimpleCalculator.getOperands(PLUS);
         assertEquals(2, operands.getLeft());
         assertEquals(3, operands.getRight());
     }
 
     @Test
     void getOperator() throws OperationNotSupportedException {
-        SimpleCalculator.Operator plus = SimpleCalculator.getOperator(PLUS);
-        SimpleCalculator.Operator minus = SimpleCalculator.getOperator(MINUS);
-        SimpleCalculator.Operator multi = SimpleCalculator.getOperator(MULTI);
-        SimpleCalculator.Operator deli = SimpleCalculator.getOperator(DELI);
+        Operator plus = SimpleCalculator.getOperator(PLUS);
+        Operator minus = SimpleCalculator.getOperator(MINUS);
+        Operator multi = SimpleCalculator.getOperator(MULTI);
+        Operator deli = SimpleCalculator.getOperator(DELI);
 
-        assertEquals(SimpleCalculator.Operator.PLUS, plus);
-        assertEquals(SimpleCalculator.Operator.MINUS, minus);
-        assertEquals(SimpleCalculator.Operator.MULTI, multi);
-        assertEquals(SimpleCalculator.Operator.DELI, deli);
+        assertEquals(Operator.PLUS, plus);
+        assertEquals(Operator.MINUS, minus);
+        assertEquals(Operator.MULTI, multi);
+        assertEquals(Operator.DELI, deli);
     }
 
     @Test
