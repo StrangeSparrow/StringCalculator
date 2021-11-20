@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class SimpleCalculator {
-    public static final String PRIORITY_EX_PATTERN = "\\(-?\\d+([+,\\-*/]\\d+)*\\)";
+    private static final String PRIORITY_EX_PATTERN = "\\(-?\\d+([+,\\-*/]\\d+)*\\)";
 
     public static Integer calculate(String ex) throws OperationNotSupportedException {
         String resEx = ex.replace(" ", "");
@@ -34,8 +34,8 @@ public class SimpleCalculator {
         return multiCalc(resEx);
     }
 
-    public static Integer multiCalc(String ex) throws OperationNotSupportedException {
-        String resEx = ex.replace(" ", "");
+    private static Integer multiCalc(String ex) throws OperationNotSupportedException {
+        String resEx = ex;
         String biEx;
         Integer biRes;
 
@@ -59,10 +59,9 @@ public class SimpleCalculator {
         return biCalc(resEx);
     }
 
-    public static String getPriorityOperation(String ex) {
-        String resEx = ex.replace(" ", "");
+    private static String getPriorityOperation(String ex) {
         Pattern p = Pattern.compile("[\\d]+[*,/][\\d]+");
-        Matcher m = p.matcher(resEx);
+        Matcher m = p.matcher(ex);
 
         if (m.find()) {
             return m.group();
@@ -70,11 +69,9 @@ public class SimpleCalculator {
         return null;
     }
 
-    public static String getBiEx(String ex) {
-        String resEx = ex.replace(" ", "");
-
+    private static String getBiEx(String ex) {
         Pattern p = Pattern.compile("^[\\d]+[+,\\-*/][\\d]+");
-        Matcher m = p.matcher(resEx);
+        Matcher m = p.matcher(ex);
 
         if (m.find())
             return m.group();
@@ -82,18 +79,16 @@ public class SimpleCalculator {
             return null;
     }
 
-    public static Integer biCalc(String ex) throws OperationNotSupportedException {
+    private static Integer biCalc(String ex) throws OperationNotSupportedException {
         Operands operands = getOperands(ex);
         Operator operator = getOperator(ex);
 
         return getResult(operands, operator);
     }
 
-    public static Operands getOperands(String ex) {
-        String resEx = ex.replace(" ", "");
-
+    private static Operands getOperands(String ex) {
         Pattern p = Pattern.compile("(^-)?\\d+");
-        Matcher m = p.matcher(resEx);
+        Matcher m = p.matcher(ex);
 
         List<Integer> results = m.results()
                 .map(MatchResult::group)
@@ -109,7 +104,7 @@ public class SimpleCalculator {
         return operands;
     }
 
-    public static Operator getOperator(String ex) throws OperationNotSupportedException {
+    private static Operator getOperator(String ex) throws OperationNotSupportedException {
         Pattern p = Pattern.compile("[+,\\-*/]");
         Matcher m = p.matcher(ex);
 
